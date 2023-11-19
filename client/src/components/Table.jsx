@@ -1,7 +1,13 @@
 import React from 'react'
 import { BiCheckboxSquare } from "react-icons/bi";
-export default function Table({first , last , gender , mail , domain , avatar , available , selected , setSelected , handle , team}) {
-  return (
+export default function Table({first , last , gender , mail , domain , avatar , available , selected , setSelected , handle , team , setShowModal , id , data}) {
+
+
+const handleclick = ()=>{
+    id(data._id)
+    setShowModal(true)
+}
+    return (
     <>
 
 <tr className={selected.some(i=> i === domain) ?  team.some(j=>j === mail) ? "cursor-pointer border-b dark:bg-gray-500 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" : "pointer-events-none border-b dark:bg-gray-500 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -35,7 +41,9 @@ export default function Table({first , last , gender , mail , domain , avatar , 
                     {available === true ? <div>Yes</div> : <div>No</div>}
                 </td>
                 <td className="px-6 py-4">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <a 
+                    onClick={handleclick}
+                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
                 </td>
             </tr>
     

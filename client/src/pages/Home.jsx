@@ -3,6 +3,7 @@ import axios from 'axios'
 import Table from '../components/Table';
 import Filter from '../components/Filter';
 import Navbar from '../components/Navbar';
+import ViewUser from '../components/ViewUser';
 export default function Home() {
 
  const[data , setData] = useState();
@@ -16,6 +17,9 @@ export default function Home() {
  const[selected , setSelected] = useState([]);
  const[team , setTeam] = useState([]);
  const[teamname , setTeamname] = useState('');
+ const[showModal , setShowModal] = useState(false);
+ const[id , setId] = useState();
+
 //  console.log(team)
 
  const handleSelected = (Item , mail) => {
@@ -60,24 +64,27 @@ export default function Home() {
   
     useEffect(()=>{
         init();
-    },[filter])
+    },[filter , showModal])
 
  
     const handleTeam = async() =>{
-      console.log("hi")
-      // if(team.length > 0){
+      // console.log("hi")
+      if(team.length > 0 && teamname.length > 0){
         const res  = await axios.post('http://localhost:3000/team/create' , {"team" : team , "name" : teamname})
         setTeam([]);
         setSelected([]);
         setTeamname('');
-      // }
+      }else{
+        alert("enter team name and tema size should more than 0")
+      }
     
     }
 
   return (
 
-    <div className='w-full h-screen'>
- <Navbar/>
+    <div  className='w-full bg-gray-400'>
+ 
+ <ViewUser showModal={showModal} setShowModal={setShowModal} id={id}/>
 <div className='my-16' style={{marginLeft : 'auto' , marginRight : 'auto',  width : '70%'}}>
 
   {displaydata ? <div>
@@ -98,6 +105,15 @@ export default function Home() {
    <Filter setGender={setGender} setAvail={setAvail} gender={gender} avail={avail} dom={dom} setDom={setDom} setFilter={setFilter} filter={filter}/>
    </div>
  </div>
+ <div className='flex m-2'>
+  {/* <label for="first_name" className=" mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label> */}
+            <input type="text" 
+            onChange={(e)=>{setTeamname(e.target.value)}}
+            id="first_name" className=" w-36 mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block   dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter team name" required />
+ 
+            <button  onClick={()=>{handleTeam()}} className="bg-green-400 rounded-2xl px-4 py-2 "
+  >Create Team</button>
+  </div>
     {/* <label for="search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label> */}
   
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -127,7 +143,7 @@ export default function Home() {
         </thead>
         <tbody>
     {displaydata.filter(name => name.first_name.toUpperCase().includes(search.toUpperCase()) || name.last_name.toUpperCase().includes(search.toUpperCase()) ).map((d)=>
-      <Table first={d.first_name} last={d.last_name} gender={d.gender} mail={d.email} domain={d.domain} avatar={d.avatar} available={d.available} selected={selected} setSelected={setSelected} handle={handleSelected} team={team}/>
+      <Table first={d.first_name} last={d.last_name} gender={d.gender} mail={d.email} domain={d.domain} avatar={d.avatar} available={d.available} selected={selected} setSelected={setSelected} handle={handleSelected} team={team} setShowModal={setShowModal}  id={setId} data={d} />
     )}
 </tbody>
     </table>
@@ -197,15 +213,7 @@ export default function Home() {
     </li>
   </ul>
   </div> : <div>loading...</div>}
-  <div className='flex'>
-  <label for="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-            <input type="text" 
-            onChange={(e)=>{setTeamname(e.target.value)}}
-            id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter team name" required />
- 
-            <button  onClick={()=>{handleTeam()}} className="bg-green-400 rounded-2xl px-4 py-2 m-2"
-  >Create Team</button>
-  </div>
+
   
 </div>
     </div>

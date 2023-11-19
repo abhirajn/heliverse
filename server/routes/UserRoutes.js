@@ -51,9 +51,9 @@ filterdata =  filterdata.filter(d=> d.gender === gender)
 
 router.get('/users/:id' , async(req ,res)=>{
     const temp = await req.params.id;
-    const r = await User.find({'id' : temp});
+    const r = await User.findById(temp);
     if(r){
-        res.status(200).json(r);
+        res.send(r);
     }else{
         res.status(400).json("error");
     }
@@ -61,7 +61,7 @@ router.get('/users/:id' , async(req ,res)=>{
 })
 
 router.post('/users' , async(req , res)=>{
-    const obj = req.body;
+    const obj = req.body.obj
     const r = await User.find({});
     obj.id = r.length+1;
     const newobj =await new User(obj);
@@ -71,7 +71,9 @@ router.post('/users' , async(req , res)=>{
 
 
 router.put('/users/:id' , async(req , res)=>{
-    const up = await User.findOneAndUpdate({"id" : req.params.id} , req.body )
+    console.log("hi")
+    // console.log(req.body)
+    const up = await User.findOneAndUpdate({"_id" : req.params.id} , req.body.obj )
     if(up){
         res.send("user updated");
     }else{
@@ -81,7 +83,7 @@ router.put('/users/:id' , async(req , res)=>{
 
 
 router.delete('/users/:id' , async(req , res)=>{
-    const del = await User.deleteOne({'id' : req.params.id});
+    const del = await User.deleteOne({'_id' : req.params.id});
     if(del){
         res.send("user deleted");
     }else{
