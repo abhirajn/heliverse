@@ -10,7 +10,7 @@ export default function Teams() {
     const[showTeam , setShowTeam] = useState();
 
     const initial = async() =>{
-        const res = await axios.get('http://localhost:8000/team/');
+        const res = await axios.get('https://heliverse-backend-xxxd.onrender.com/team/');
         setData(res.data);
     }
    

@@ -47,7 +47,7 @@ export default function Home() {
 };
 
     const init = async() =>{
-        const res = await axios.post('http://localhost:8000/api/usersinfo',
+        const res = await axios.post('https://heliverse-backend-xxxd.onrender.com/api/usersinfo',
         {"gender" : gender,
       "avail" : avail,
     "domain" : dom}
@@ -70,7 +70,7 @@ export default function Home() {
     const handleTeam = async() =>{
       // console.log("hi")
       if(team.length > 0 && teamname.length > 0){
-        const res  = await axios.post('http://localhost:8000/team/create' , {"team" : team , "name" : teamname})
+        const res  = await axios.post('https://heliverse-backend-xxxd.onrender.com/team/create' , {"team" : team , "name" : teamname})
         setTeam([]);
         setSelected([]);
         setTeamname('');

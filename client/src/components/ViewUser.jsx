@@ -20,7 +20,7 @@ export default function ViewUser({showModal , setShowModal , id}) {
         console.log("hi")
         if(id){
             console.log("hi2")
-            const res = await axios.get(`http://localhost:3000/api/users/${id}`);
+            const res = await axios.get(`https://heliverse-backend-xxxd.onrender.com/api/users/${id}`);
            setCheck(false)
             setFirst(res.data.first_name)
             setLast(res.data.last_name)
@@ -52,7 +52,7 @@ export default function ViewUser({showModal , setShowModal , id}) {
         }
         // console.log("hi")
        if(id){
-        await axios.put(`http://localhost:3000/api/users/${id}`, {
+        await axios.put(`https://heliverse-backend-xxxd.onrender.com/api/users/${id}`, {
             "obj" : obj
           }).then(()=>alert("updated"))
        }
@@ -67,7 +67,7 @@ export default function ViewUser({showModal , setShowModal , id}) {
 
   const handleDelete = async(e)=>{
     e.preventDefault();
-  await  axios.delete(`http://localhost:3000/api/users/${id}`).then(()=>alert("deleted"))
+  await  axios.delete(`https://heliverse-backend-xxxd.onrender.com/api/users/${id}`).then(()=>alert("deleted"))
 
 }
 
