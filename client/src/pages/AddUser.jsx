@@ -22,7 +22,7 @@ export default function AddUser() {
         "available" : avail
     }
 
-    await axios.post('http://localhost:3000/api/users' , {"obj" : obj});
+    await axios.post('http://localhost:8000/api/users' , {"obj" : obj});
      setFirst("");
      setLast("");
      setAva("");
