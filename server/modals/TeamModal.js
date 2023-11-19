@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const User = require('./UserModal')
 const teamSchema = new mongoose.Schema({
     name : String,
-    members : [User]
+    members : []
 })
 
 
-const Team = mongoose.model('Team' , teamSchema)l
+const Team = mongoose.model('Team' , teamSchema)
 module.exports = Team;
