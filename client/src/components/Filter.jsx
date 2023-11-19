@@ -83,8 +83,8 @@ export default function Filter({ setGender, setAvail , gender ,  avail ,  dom , 
 
           <li className="dropdown">
       <div className='flex '>
-      <p className="w-2/4 bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap m-1" >C</p>
-      <p className="w-2/4 bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap my-1 mr-1" onClick={()=>{setFilter(!filter)}} >APP</p>
+      <p className="w-2/4 bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap m-1" >cancel</p>
+      <p className="w-2/4 bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap my-1 mr-1" onClick={()=>{setFilter(!filter)}} >apply</p>
       </div>
           </li>
 
